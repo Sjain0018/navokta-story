@@ -46,6 +46,8 @@
 
 .member-image {
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .member-image img {
