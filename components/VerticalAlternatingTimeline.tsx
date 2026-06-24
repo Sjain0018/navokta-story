@@ -1,215 +1,334 @@
 'use client';
 
-import React from 'react';
-import { Chrono } from 'react-chrono';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  CalendarIcon, 
+  ChevronDownIcon, 
+  ChevronUpIcon,
+  SparklesIcon,
+  RocketIcon,
+  StarIcon,
+  HeartIcon,
+  LightbulbIcon,
+  TrophyIcon,
+  UsersIcon,
+  CodeIcon,
+  FlagIcon
+} from 'lucide-react';
 
-// Define types for timeline items
+// Types
 interface TimelineItem {
   title: string;
   cardTitle: string;
   cardSubtitle: string;
   cardDetailedText: React.ReactNode;
+  icon?: React.ReactNode;
+  color?: string;
 }
 
-const items: TimelineItem[] = [
-  {
-    title: "July 2024",
-    cardTitle: "Event 1",
-    cardSubtitle: "Let's start from the beginning.",
-    cardDetailedText: (
-      <div className="space-y-4 text-gray-700 leading-relaxed">
-        <p>
-          I, Bhavy Sharma, entered IP College (Campus-2) on September 18, 2023. Everything was new—new people, unfamiliar faces, and a feeling of not belonging. I didn't know anyone, and a constant fear of missing out (FOMO) lingered. I worried: Will anyone even know me? Will I get lost in the crowd?
-        </p>
-        <p>
-          And for the most part, that's exactly how the first semester went. I made a few friends, but I wasn't deeply connected with anyone. Despite this, I focused on self-improvement. I began working on small projects, sharpening my skills, and helping my peers whenever I could.
-        </p>
-        <p>
-          During that time, I started creating PDFs of solved question papers from the past 5–7 years for my friends. Each PDF proudly bore the line 'Made by Bhavy Sharma' before I shared it. While my friends didn't care about the credit, I found satisfaction in the fact that I was contributing something valuable. They studied from those PDFs, and many times the same questions appeared in their exams. Slowly, my name began to gain recognition.
-        </p>
-        <p>
-          Rather than sending the PDFs individually, I created a small WhatsApp group to share them more efficiently. Around the same time, some students from my batch began forming a group called 'BCA 2nd Sem'. A friend of mine named Abhinav joined it—he was passionate but just needed some direction. With his support, the PDFs I had initially shared with 5–8 people were now reaching 50–60 students.
-        </p>
-        <p>
-          Over time, the group admins lost interest, and by chance, I became one of the admins. Meanwhile, I was also working on a personal project—a virtual assistant inspired by Iron Man's J.A.R.V.I.S., which I named EDITH (Even Dead I'm The Hero). After I launched EDITH, it caught the attention of many students. They began reaching out with their problems, asking if EDITH could be enhanced to help solve them. They didn't build anything themselves, but they shared their needs, and I'd find solutions. That was my strength.
-        </p>
-        <p>
-          At this point, the group was thriving. My PDFs had become popular—students were even printing them out to study for internal and external exams. Though many didn't know me by face, they knew the name: 'Bhavy Sharma – the one who makes those PDFs.'
-        </p>
-        <p>
-          One day, a friend failed his exam and asked me for an older PDF. I tried retrieving it but couldn't find it anywhere. That's when I thought—Why not build a platform where juniors can access and download these notes anytime?
-        </p>
-        <p>
-          And so, nEmi Notes was born—created to provide students with easy access to academic resources.
-        </p>
-        <p>
-          As this happened, the number of members in our group grew rapidly, largely due to the support of Richa Ma'am, one of our college faculty members. She understood that I thought differently—my approach was not typical of most students. I told her about my vision of building a student community that would grow together. She believed in the idea and shared our group link on her Google Classroom.
-        </p>
-        <p>
-          Within days, our group expanded from 60 to over 200 students. With that came greater responsibility—to improve, to produce high-quality resources, and to continue contributing.
-        </p>
-        <p>
-          Eventually, I realized that while a WhatsApp group worked for basic communication, it lacked a true community feel. That's when the idea of "Veda Verse" came to me—a platform where students could unite and fuel their passions. I discussed it with my mother, and she loved the concept. She said, 'Yes, son—this is how progress begins.' Her support inspired me to build a small team.
-        </p>
-        <p>
-          Only one member of the team, Chetan, had coding experience. Despite limited resources, we worked with passion. However, a few months later, the domain we had purchased was sold off—mainly because I had a habit of openly sharing plans before execution. While many appreciated the vision, not everyone truly supported it.
-        </p>
-        <p>
-          And just like that, we were back to square one. But I didn't feel discouraged. In fact, around that time, I had been building a YouTube-style clone for Veda Verse for 15 days straight. Instead of criticizing my efforts, my peers praised my creativity. Their words—'This is awesome,' 'How do you come up with such ideas?'—meant a lot.
-        </p>
-        <p>
-          But eventually, reality hit. I realized that not everyone who praises you stands with you when it matters. And that's where the journey of Veda Verse came to an end.
-        </p>
-        <div className="mt-4 p-4 bg-pink-50 border-l-4 border-pink-600 rounded-r-lg">
-          <strong className="text-pink-700">Moral of the Story:</strong>
-          <p className="mt-2">Never blindly trust those close to you, and don't let others' opinions dictate your path—because not everyone truly supports you.</p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "February 2024",
-    cardTitle: "Event 2",
-    cardSubtitle: "A New Chapter Begins",
-    cardDetailedText: (
-      <div className="space-y-4 text-gray-700 leading-relaxed">
-        <p>
-          As we turned the page to a new chapter, things continued to progress. The group I had started was steadily growing, eventually reaching over 270 students. By the second semester, we began sharing not only PDFs but also curated YouTube video resources. By the third semester, we had built a strong identity and a credible name for ourselves—something I never imagined when I first joined college.
-        </p>
-        <p>
-          Around this time, a small group was formed under the name <strong>Clueless Coders</strong>. That's when I met Anjali, who was deeply passionate about DSA (Data Structures & Algorithms). She was focused, driven, and excellent at building connections. I, on the other hand, had my doubts about the hype around DSA. In my mind, DSA wasn't just about solving questions; it was about solving real-world problems—something many failed to understand at that time.
-        </p>
-        <p>
-          I wasn't solving problems to impress anyone. I did it because I saw issues around me and believed that maybe, just maybe, I could solve them using code. But there was no one to support these ideas initially. Still, I formed a small core group including Anjali, Kratakshi, Vansh, Ashish, and Arshad—all my batchmates. Everyone had the intention to do something meaningful, but lacked the right direction.
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Kratakshi</strong> wanted to learn but didn't know where to begin.</li>
-          <li><strong>Ashish</strong> had an interest in Python and, like Kratakshi, had studied it since 12th grade.</li>
-          <li><strong>Arshad</strong> wasn't into web development; he was more inclined toward app development.</li>
-          <li><strong>Vansh</strong> wasn't from our college; I met him through a friend. He was from AKTU University and was already learning Java in his 3rd semester. His potential synergy with Anjali (another Java enthusiast) was evident.</li>
-        </ul>
-        <p>
-          Our group functioned well for a while—until exam season hit, followed by a tragic event: Anjali's father passed away, and the group disbanded. After that, I tried restarting the initiative with Vansh and Kratakshi, but the results didn't meet expectations.
-        </p>
-        <p>
-          This made me realize I needed skilled collaborators. That's when the idea for a coding competition platform—<strong>ByteWar</strong>—came to life.
-        </p>
-        <p>
-          My friend <strong>Gaurav Singh Rawat</strong> stood beside me as a strong supporter. While I handled the technical side, he managed financials, promoted the event, handled registrations, and even created banners. On September 1, we officially announced ByteWar, and by September 8, we successfully conducted our first college-wide coding competition.
-        </p>
-        <p>
-          30–40 students participated, and <strong>Aastha Sharma</strong> from our college won first prize. The feedback we received suggested ways to improve the platform, which gave rise to my next idea—<strong>Adwit</strong>, an online coding platform where anyone could write and run code in any language. It was a unique project but, like others before it (except for nEmi Notes), it wasn't maintained for long.
-        </p>
-        <p>
-          Soon after, we got an incredible opportunity—<strong>SmartIDEAthon</strong>, a startup competition. Eight of us—myself, Kratakshi, Bhumi, Abhishek, Atul, Arshi, Gaurav, and Divya—formed pairs and worked intensively for 5 days on an idea:
-        </p>
-        <p className="italic text-pink-700 font-medium">
-          "A Smart AI Chatbot for Mental Health Support for students and patients."
-        </p>
-        <p>
-          Surprisingly, our idea was selected. But what followed was unexpected and disheartening. While everyone seemed supportive on the outside, I sensed hidden jealousy. No one seemed genuinely happy for me. In trying to keep others happy—by stepping back so others wouldn't feel excluded—I ended up missing out on an incredible opportunity myself.
-        </p>
-        <p>
-          That moment stayed with me. But it also became a turning point. I started understanding people better. I began reading about psychology and observing how relationships work—why people connect, and with what intent.
-        </p>
-        <p>
-          Eventually, I met my current team: <strong>Fazal, Sakshi, Bhumi, and Kratakshi</strong>.
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Fazal</strong> was a quiet contributor. He worked in silence, often misunderstood because of his reserved and sometimes negative demeanor. But once you got to know him, you'd realize how genuinely committed he was.</li>
-          <li><strong>Sakshi</strong> was eager to contribute, but having spent her first year on C/C++, she felt like she was starting from scratch. Like many others, she had entered college to enjoy life and was now playing catch-up.</li>
-          <li><strong>Kratakshi</strong> had become serious by this time—keen to learn and grow.</li>
-          <li><strong>Bhumi</strong>, at first glance, seemed to have an advantage due to her relatives working in the tech industry. But in reality, she had to start from the ground up. What I admired most was her deep sense of loyalty and understanding of friendship. She didn't consider everyone a "friend" just because they knew each other. She taught me what real connection and meaningful bonds looked like.</li>
-        </ul>
-        <div className="mt-4 p-4 bg-pink-50 border-l-4 border-pink-600 rounded-r-lg">
-          <strong className="text-pink-700">Moral of the Story:</strong>
-          <p className="mt-2">Before sharing your happiness, ask yourself—Will the person you're sharing it with be genuinely happy for you?</p>
-          <p className="mt-2">Because the truth is, not everyone will be. And most importantly, learn to distinguish between people who are truly your friends and those who are not. Even today, I'm still learning this lesson.</p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "October 2024",
-    cardTitle: "Event 3",
-    cardSubtitle: "Building Something Real",
-    cardDetailedText: (
-      <div className="space-y-4 text-gray-700 leading-relaxed">
-        <p>
-          From October 2024, we began receiving more opportunities from the college, though our institution wasn't as supportive as it appeared on the surface. For the first time in a long while, our college hosted a fresher's farewell party, where Bhumi and I were selected as the anchors. Soon after, we also took the lead in organizing the Women's Day celebration. These events gave us the chance to collaborate with students from different courses like BBA, BSc, and others—expanding our network and visibility. Even our college faculty started recognizing us.
-        </p>
-        <p>
-          During this time, we met Shubham and Prateek, two BBA students from our own batch. They had an interest in business, which matched a growing spark inside me—ignited earlier by a senior named Naman Sharma. I had met Naman unexpectedly while heading to tuition at 5 AM. He later helped me with YouTube management, creating thumbnails, and supporting my ideas consistently. Although we never got the opportunity to work formally, he played a significant role in shaping my entrepreneurial mindset.
-        </p>
-        <p>
-          Alongside him, my friend Gaurav also emphasized the idea that I could start monetizing the projects I had been offering for free. All the platforms and tools I had built till then—ByteWar, Adwit, nEmi Notes—had been available to everyone at no cost. Their encouragement led me to begin connecting everything I built to the idea of earning money.
-        </p>
-        <p>
-          This was the mindset I had when I reconnected with Shubham and Prateek. Our discussions reignited that entrepreneurial flame, but we were stuck at a familiar problem: what exactly should we build? At the same time, my collaboration with Bhumi deepened, as she too was inclined toward starting something meaningful. We aligned on one decision—we wanted to build a business together.
-        </p>
-        <p>
-          We brainstormed multiple ideas, but lacked either the resources, money, or most importantly—time. We'd often defer our plans, thinking: "If this doesn't work, we'll try something else." That "something else" never started.
-        </p>
-        <p>
-          Eventually, we decided to name our initiative <strong>Navokta</strong>, meaning "something new." The name was suggested by our friend Sakshi. The idea was to create and deliver client websites. We even worked with a few initial clients and earned money. At first, it felt like we had cracked the formula: build websites, get paid. But soon, harsh reality struck.
-        </p>
-        <p>
-          We weren't the only ones in this field—countless others were doing the same. I grew concerned about my team. They were relaxed, believing I would figure things out, while I felt the burden of bringing clients and work to the table. On June 5, 2025, we purchased the domain <strong>Navokta.com</strong>, deciding to take things seriously.
-        </p>
-        <p>
-          I began making 120–130 cold calls a day trying to find clients. Around the same time, our college teacher, <strong>Richa Ma'am</strong>, planned to launch a podcast and vlog channel. She invited my team to collaborate with her. Now, the pressure doubled—Navokta responsibilities on one side, and this new creative project on the other.
-        </p>
-        <p>
-          I felt lost. So I took a step back to reflect and realized something important: we were chasing money, not impact. That wasn't who we were. We were supposed to be building solutions. Money is secondary—if you add real value to someone's life, money will eventually follow.
-        </p>
-        <p>
-          Though this realization came late, it hit hard. I felt regret. I thought we had wasted so much time. But after a deep conversation with Bhumi, I understood: at the very least, we had learned what *not* to do.
-        </p>
-        <p>
-          We came to terms with one thing—we didn't want to build client websites anymore. That wasn't our true calling. But then the question became: what is?
-        </p>
-        <p>
-          That's when the idea emerged—why not share this experience with others? Why not build a platform that showcases people's journeys—both successes and failures? And so, the new direction of <strong>Navokta</strong> was born: a platform where people could share their stories, lessons, and journeys so others could learn from them.
-        </p>
-        <div className="mt-4 p-4 bg-pink-50 border-l-4 border-pink-600 rounded-r-lg">
-          <strong className="text-pink-700">Moral of the Story:</strong>
-          <p className="mt-2">Always try to learn not just from your own mistakes—but also from others'. Life is short, and the more you absorb from others' journeys, the quicker you grow.</p>
-          <p className="mt-2">And second, <em>just start</em>. Don't overthink. Mistakes are the only way to move forward. I've made many—and I've grown through all of them. So can you.</p>
-        </div>
-      </div>
-    ),
-  }
-];
+interface TimelineProps {
+  items: TimelineItem[];
+}
 
 const VerticalAlternatingTimeline: React.FC = () => {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  const items: TimelineItem[] = [
+    {
+      title: "July 2024",
+      cardTitle: "The Beginning of a Dream",
+      cardSubtitle: "Every journey starts with a single step",
+      icon: <SparklesIcon className="w-5 h-5" />,
+      color: "from-pink-500 to-rose-500",
+      cardDetailedText: (
+        <div className="space-y-4 text-gray-700 leading-relaxed">
+          <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-lg border border-pink-200">
+            <p>I, Bhavy Sharma, entered IP College (Campus-2) on September 18, 2023. Everything was new—new people, unfamiliar faces, and a feeling of not belonging.</p>
+          </div>
+          <p>And for the most part, that's exactly how the first semester went. I made a few friends, but I wasn't deeply connected with anyone. Despite this, I focused on self-improvement.</p>
+          <div className="bg-white p-4 rounded-lg border-2 border-pink-200 shadow-sm">
+            <p className="font-medium text-pink-700">💡 I started creating PDFs of solved question papers. Each PDF proudly bore the line 'Made by Bhavy Sharma'.</p>
+          </div>
+          <p>Rather than sending the PDFs individually, I created a small WhatsApp group. With Abhinav's support, the PDFs reached 50–60 students.</p>
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg border border-purple-200">
+            <p>🚀 I became one of the admins and started working on <strong className="text-pink-600">EDITH</strong> (Even Dead I'm The Hero).</p>
+          </div>
+          <p>My PDFs became popular—students were even printing them out. Though many didn't know me by face, they knew the name: <strong className="text-pink-600">'Bhavy Sharma – the one who makes those PDFs.'</strong></p>
+          <div className="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-500">
+            <p>💭 One day, a friend failed his exam and asked for an older PDF. That's when I thought—<strong className="text-pink-600">Why not build a platform where juniors can access notes anytime?</strong></p>
+          </div>
+          <p>And so, <strong className="text-pink-600">nEmi Notes</strong> was born—created to provide students with easy access to academic resources.</p>
+          <p>With <strong className="text-pink-600">Richa Ma'am's</strong> support, our group expanded from 60 to over 200 students.</p>
+          <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-5 rounded-xl shadow-md">
+            <p>🎯 That's when the idea of <strong className="text-pink-600">"Veda Verse"</strong> came to me—a platform where students could unite and fuel their passions.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md border border-pink-200">
+            <p>💔 Only one member had coding experience. Despite limited resources, we worked with passion. But the domain was sold off—mainly because I shared plans openly.</p>
+          </div>
+          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+            <p>😔 I realized that <strong className="text-red-600">not everyone who praises you stands with you when it matters</strong>.</p>
+          </div>
+          <div className="mt-4 p-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl shadow-lg text-white">
+            <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <SparklesIcon className="w-6 h-6" /> Moral of the Story
+            </h4>
+            <p>Never blindly trust those close to you, and don't let others' opinions dictate your path—because not everyone truly supports you.</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "February 2024",
+      cardTitle: "A New Chapter Unfolds",
+      cardSubtitle: "Growth comes from challenges",
+      icon: <RocketIcon className="w-5 h-5" />,
+      color: "from-purple-500 to-indigo-500",
+      cardDetailedText: (
+        <div className="space-y-4 text-gray-700 leading-relaxed">
+          <p>The group reached over <strong className="text-pink-600">270 students</strong>. We began sharing not only PDFs but also curated YouTube video resources.</p>
+          <div className="bg-gradient-to-r from-blue-50 to-pink-50 p-4 rounded-lg border border-blue-200">
+            <p>🤝 A group called <strong className="text-pink-600">Clueless Coders</strong> was formed. I met <strong className="text-pink-600">Anjali</strong>, who was deeply passionate about DSA.</p>
+          </div>
+          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <p className="font-medium">🌟 Core team members:</p>
+            <ul className="list-none space-y-1 mt-2">
+              <li>• <strong className="text-pink-600">Anjali</strong> - Focused, driven, excellent at building connections</li>
+              <li>• <strong className="text-pink-600">Kratakshi</strong> - Eager to learn, full of potential</li>
+              <li>• <strong className="text-pink-600">Vansh</strong> - From AKTU, already learning Java</li>
+              <li>• <strong className="text-pink-600">Ashish</strong> - Python enthusiast since 12th grade</li>
+              <li>• <strong className="text-pink-600">Arshad</strong> - More inclined toward app development</li>
+            </ul>
+          </div>
+          <p>The group functioned well until Anjali's father passed away, and the group disbanded.</p>
+          <div className="bg-gradient-to-r from-orange-50 to-pink-50 p-4 rounded-lg border border-orange-200">
+            <p>💪 That's when the idea for <strong className="text-pink-600">ByteWar</strong>—a coding competition platform—came to life.</p>
+          </div>
+          <p>My friend <strong className="text-pink-600">Gaurav Singh Rawat</strong> stood beside me. He managed financials, promoted the event, and handled registrations.</p>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <p>🏆 <strong className="text-pink-600">30–40 students</strong> participated. The feedback gave rise to <strong className="text-pink-600">Adwit</strong>, an online coding platform.</p>
+          </div>
+          <p>We got an incredible opportunity—<strong className="text-pink-600">SmartIDEAthon</strong>, a startup competition. Our idea was selected:</p>
+          <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-5 rounded-xl text-center shadow-md">
+            <p className="text-pink-700 font-medium italic">"A Smart AI Chatbot for Mental Health Support"</p>
+          </div>
+          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+            <p>😞 Everyone seemed supportive on the outside, but I sensed hidden jealousy. I ended up missing out on an incredible opportunity.</p>
+          </div>
+          <div className="bg-gradient-to-r from-green-50 to-pink-50 p-4 rounded-lg border border-green-200">
+            <p>🤗 Eventually, I met my current team: <strong className="text-pink-600">Fazal, Sakshi, Bhumi, and Kratakshi</strong>.</p>
+          </div>
+          <div className="mt-4 p-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl shadow-lg text-white">
+            <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <HeartIcon className="w-6 h-6" /> Moral of the Story
+            </h4>
+            <p>Before sharing your happiness, ask yourself—Will the person you're sharing it with be genuinely happy for you?</p>
+            <p className="mt-2">Learn to distinguish between people who are truly your friends and those who are not.</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "October 2024",
+      cardTitle: "Building Something Real",
+      cardSubtitle: "Turning dreams into reality",
+      icon: <StarIcon className="w-5 h-5" />,
+      color: "from-rose-500 to-pink-500",
+      cardDetailedText: (
+        <div className="space-y-4 text-gray-700 leading-relaxed">
+          <p>From October 2024, we began receiving more opportunities from the college. <strong className="text-pink-600">Bhumi</strong> and I were selected as anchors for the fresher's farewell.</p>
+          <div className="bg-gradient-to-r from-yellow-50 to-pink-50 p-4 rounded-lg border border-yellow-200">
+            <p>🎤 We also organized the Women's Day celebration. We collaborated with BBA, BSc, and other students.</p>
+          </div>
+          <p>We met <strong className="text-pink-600">Shubham</strong> and <strong className="text-pink-600">Prateek</strong>, two BBA students with an interest in business.</p>
+          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <p>💡 My friend <strong className="text-pink-600">Gaurav</strong> suggested I could monetize the projects I had been offering for free.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md border border-pink-200">
+            <p>💰 We brainstormed multiple ideas, but lacked resources, money, or time. We'd defer our plans: <em className="text-pink-600">"If this doesn't work, we'll try something else."</em></p>
+          </div>
+          <p>We named our initiative <strong className="text-pink-600 text-lg">Navokta</strong>, meaning "something new."</p>
+          <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-5 rounded-xl shadow-md">
+            <p>🎯 The idea was to create and deliver client websites. We worked with initial clients and earned money.</p>
+          </div>
+          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+            <p>😰 But reality struck. On <strong className="text-pink-600">June 5, 2025</strong>, we purchased <strong className="text-pink-600">Navokta.com</strong>.</p>
+          </div>
+          <p>I began making <strong className="text-pink-600">120–130 cold calls</strong> a day trying to find clients.</p>
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200">
+            <p>🤔 I realized: <strong className="text-pink-600">we were chasing money, not impact.</strong> Money is secondary—if you add real value, money will follow.</p>
+          </div>
+          <div className="bg-gradient-to-r from-green-50 to-pink-50 p-4 rounded-lg border border-green-200">
+            <p>💡 Why not share this experience with others? Why not build a platform that showcases people's journeys?</p>
+          </div>
+          <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-5 rounded-xl shadow-lg">
+            <p className="text-white text-center text-lg font-bold">🌟 <span className="text-yellow-300">Navokta</span> was born: a platform where people share their stories and lessons.</p>
+          </div>
+          <div className="mt-4 p-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl shadow-lg text-white">
+            <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <FlagIcon className="w-6 h-6" /> Moral of the Story
+            </h4>
+            <p>Always try to learn not just from your own mistakes—but also from others'.</p>
+            <p className="mt-2"><em className="text-yellow-200 font-bold">Just start</em>. Don't overthink. Mistakes are the only way to move forward.</p>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const toggleExpand = (index: number) => {
+    setExpandedId(expandedId === index ? null : index);
+  };
+
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      <Chrono
-        items={items}
-        mode="VERTICAL_ALTERNATING"
-        itemWidth={150}
-        fontSizes={{
-          cardSubtitle: '0.85rem',
-          cardText: '0.8rem',
-          cardTitle: '1rem',
-          title: '1rem',
-        }}
-        cardHeight={500}
-        theme={{
-          primary: '#d63384',
-          secondary: '#fff0f5',
-          cardBgColor: '#ffffff',
-          titleColor: '#d63384',
-          titleColorActive: '#d63384',
-        }}
-        classNames={{
-          card: 'shadow-lg hover:shadow-xl transition-shadow duration-300',
-          cardTitle: 'text-pink-600 font-bold text-lg',
-          cardSubTitle: 'text-gray-600 font-medium',
-          cardText: 'text-gray-700',
-          title: 'text-pink-700 font-bold',
-        }}
-      />
+    <div className="w-full max-w-5xl mx-auto px-4 py-12">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%] animate-gradient">
+          Our Journey
+        </h2>
+        <p className="text-gray-500 mt-3 text-lg">The story of how Navokta came to life</p>
+      </motion.div>
+
+      {/* Timeline */}
+      <div className="relative">
+        {/* Center Line */}
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-400 via-purple-400 to-pink-400" />
+
+        {items.map((item, index) => {
+          const isEven = index % 2 === 0;
+          const isExpanded = expandedId === index;
+
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className={`relative flex items-start mb-12 ${
+                isEven ? 'flex-row' : 'flex-row-reverse'
+              }`}
+            >
+              {/* Timeline Dot */}
+              <motion.div
+                whileHover={{ scale: 1.3 }}
+                className={`
+                  absolute left-4 md:left-1/2 
+                  transform -translate-x-1/2 
+                  z-10 flex items-center justify-center
+                  w-10 h-10 rounded-full 
+                  bg-gradient-to-r ${item.color}
+                  text-white shadow-lg shadow-pink-200/50
+                  border-4 border-white
+                `}
+              >
+                {item.icon}
+              </motion.div>
+
+              {/* Content */}
+              <div className={`w-full md:w-[calc(50%-40px)] ${isEven ? 'pr-4 md:pr-8' : 'pl-4 md:pl-8'}`}>
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className={`
+                    bg-white rounded-2xl shadow-lg hover:shadow-2xl 
+                    transition-all duration-300 overflow-hidden
+                    border border-pink-100/50
+                  `}
+                >
+                  {/* Header */}
+                  <div
+                    className="cursor-pointer p-5"
+                    onClick={() => toggleExpand(index)}
+                  >
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <span className="text-sm font-semibold text-pink-500 bg-pink-50 px-3 py-1 rounded-full">
+                          {item.title}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-800 mt-2">
+                          {item.cardTitle}
+                        </h3>
+                        <p className="text-gray-500 text-sm mt-1">
+                          {item.cardSubtitle}
+                        </p>
+                      </div>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-1"
+                      >
+                        {isExpanded ? (
+                          <ChevronUpIcon className="w-5 h-5 text-pink-500" />
+                        ) : (
+                          <ChevronDownIcon className="w-5 h-5 text-pink-500" />
+                        )}
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* Expandable Content */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 pb-5 pt-0 border-t border-gray-100">
+                          <div className="prose prose-pink max-w-none">
+                            {item.cardDetailedText}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Read More Button */}
+                  <div
+                    className="px-5 pb-4 cursor-pointer"
+                    onClick={() => toggleExpand(index)}
+                  >
+                    <span className="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors flex items-center gap-1">
+                      {isExpanded ? 'Show Less' : 'Read Full Story'}
+                      {isExpanded ? (
+                        <ChevronUpIcon className="w-4 h-4" />
+                      ) : (
+                        <ChevronDownIcon className="w-4 h-4" />
+                      )}
+                    </span>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Custom Animations */}
+      <style jsx global>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          animation: gradient 4s ease infinite;
+        }
+        .prose p {
+          margin-bottom: 1rem;
+          line-height: 1.8;
+        }
+        .prose strong {
+          color: #d63384;
+        }
+      `}</style>
     </div>
   );
 };
