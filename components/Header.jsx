@@ -1,14 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import "./Header.css";
-import twitter from "@/public/twitter.png";
-import linkedin from "@/public/linkedin.png";
-import insta from "@/public/insta.png";
-import github from "@/public/github.png";
-import logo from "@/public/Logo.png";
 
-const Header = () => {
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import "./Header.css";
+
+import logo from "@/public/Logo.png";
+import twitter from "@/public/twitter.png";
+import github from "@/public/github.png";
+import insta from "@/public/insta.png";
+import linkedin from "@/public/linkedin.png";
+
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -16,7 +19,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-left">
-        <img src={logo} alt="Logo" className="logo" />
+        <Image src={logo} alt="Logo" className="logo" />
         <span className="brand">Navokta</span>
       </div>
 
@@ -24,44 +27,86 @@ const Header = () => {
         <Link href="/" onClick={() => setMenuOpen(false)}>
           Home
         </Link>
-        <Link href="/About" onClick={() => setMenuOpen(false)}>
+
+        <Link href="/about" onClick={() => setMenuOpen(false)}>
           About
         </Link>
-        <Link href="/Story" onClick={() => setMenuOpen(false)}>
+
+        <Link href="/story" onClick={() => setMenuOpen(false)}>
           Stories
         </Link>
-        <Link href="/Contact" onClick={() => setMenuOpen(false)}>
+
+        <Link href="/contact" onClick={() => setMenuOpen(false)}>
           Contact
         </Link>
+
         <div className="mobile-socials">
-          <a href="https://www.linkedin.com/company/navokta/" target="_blank">
-            <img src={linkedin} alt="LinkedIn" />
+          <a
+            href="https://www.linkedin.com/company/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={linkedin} alt="LinkedIn" width={24} height={24} />
           </a>
-          <a href="https://x.com/navokta" target="_blank">
-            <img src={twitter} alt="Twitter" />
+
+          <a
+            href="https://x.com/navokta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={twitter} alt="Twitter" width={24} height={24} />
           </a>
-          <a href="https://github.com/navokta/" target="_blank">
-            <img src={github} alt="GitHub" />
+
+          <a
+            href="https://github.com/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={github} alt="GitHub" width={24} height={24} />
           </a>
-          <a href="https://www.instagram.com/navokta/" target="_blank">
-            <img src={insta} alt="Instagram" />
+
+          <a
+            href="https://www.instagram.com/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={insta} alt="Instagram" width={24} height={24} />
           </a>
         </div>
       </nav>
 
       <div className="header-right">
         <div className="desktop-socials">
-          <a href="https://www.linkedin.com/company/navokta/" target="_blank">
-            <img src={linkedin} alt="LinkedIn" />
+          <a
+            href="https://www.linkedin.com/company/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={linkedin} alt="LinkedIn" width={24} height={24} />
           </a>
-          <a href="https://x.com/navokta" target="_blank">
-            <img src={twitter} alt="Twitter" />
+
+          <a
+            href="https://x.com/navokta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={twitter} alt="Twitter" width={24} height={24} />
           </a>
-          <a href="https://github.com/navokta/" target="_blank">
-            <img src={github} alt="GitHub" />
+
+          <a
+            href="https://github.com/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={github} alt="GitHub" width={24} height={24} />
           </a>
-          <a href="https://www.instagram.com/navokta/" target="_blank">
-            <img src={insta} alt="Instagram" />
+
+          <a
+            href="https://www.instagram.com/navokta/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={insta} alt="Instagram" width={24} height={24} />
           </a>
         </div>
 
@@ -76,6 +121,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

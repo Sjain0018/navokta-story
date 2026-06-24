@@ -1,29 +1,25 @@
-import React from "react";
-import "./HeroSection.css";
 import Link from "next/link";
+import "./HeroSection.css";
 
-const HeroSection = () => {
+export default function HeroSection() {
   return (
     <section className="hero">
       <h1>
-        Are you Exicted to Listen{" "}
+        Are you Excited to Listen{" "}
         <span className="highlight">Our Hero's Story</span>
       </h1>
-      <p>Navokta: Your Stories Matters, No matter your Field.</p>
+
+      <p>Navokta: Your Story Matters, No Matter Your Field.</p>
+
       <div className="hero-buttons">
-        <Link href={"/Story"}>
-          <button className="get-started">
-            Read Stories <span className="sparkle">✨</span>
-          </button>
+        <Link href="/story" className="get-started">
+          Read Stories <span className="sparkle">✨</span>
         </Link>
-        <Link href={"/learn-more"}>
-          <button className="learn-more">
-            Learn More <span className="arrow">→</span>
-          </button>
+
+        <Link href="/learn-more" className="learn-more">
+          Learn More <span className="arrow">→</span>
         </Link>
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}
