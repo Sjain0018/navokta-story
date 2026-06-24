@@ -1,7 +1,6 @@
 /* Base Styles */
 .team-core-container {
   font-family: 'Poppins', 'Arial', sans-serif;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
   background: linear-gradient(135deg, #ffffff 0%, #fff5f5 50%, #ffebf3 100%);
