@@ -5,14 +5,14 @@ import Image from 'next/image';
 import type { StaticImageData } from 'next/image';
 
 // Import images
-import mamImg from '@/assets/mam.jpg';
-import bhavyImg from '@/assets/bhavy.jpg';
-import sakshiImg from '@/assets/Sakshi.png';
-import bhumiImg from '@/assets/bhumi.png';
-import kratakshiImg from '@/assets/kratakshi.png';
-import fazalImg from '@/assets/fazal.png';
-import abhinavImg from '@/assets/Abhinav.jpg';
-import gauravImg from '@/assets/Gaurav.jpg';
+import mamImg from '@/public/mam.jpg';
+import bhavyImg from '@/public/bhavy.jpg';
+import sakshiImg from '@/public/Sakshi.png';
+import bhumiImg from '@/public/bhumi.png';
+import kratakshiImg from '@/public/kratakshi.png';
+import fazalImg from '@/public/fazal.png';
+import abhinavImg from '@/public/Abhinav.jpg';
+import gauravImg from '@/public/Gaurav.jpg';
 
 // Type for team member
 interface TeamMember {
