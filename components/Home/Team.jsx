@@ -3,9 +3,6 @@
 import Image from "next/image";
 import "./Team.css";
 
-import bhavy from "@/assets/bhavy.jpg";
-import sakshi from "@/assets/Sakshi.png";
-
 export default function Team() {
   return (
     <section className="about-section">
@@ -22,7 +19,12 @@ export default function Team() {
         <div className="team-grid">
           <div className="team-member">
             <div className="member-image">
-              <Image src={bhavy} alt="Bhavy Sharma" width={300} height={300} />
+              <Image
+                src="/bhavy.jpg"
+                alt="Bhavy Sharma"
+                width={300}
+                height={300}
+              />
             </div>
 
             <h3>Bhavy Sharma</h3>
@@ -42,7 +44,12 @@ export default function Team() {
 
           <div className="team-member">
             <div className="member-image">
-              <Image src={sakshi} alt="Sakshi Jain" width={300} height={300} />
+              <Image
+                src="/Sakshi.png"
+                alt="Sakshi Jain"
+                width={300}
+                height={300}
+              />
             </div>
 
             <h3>Sakshi Jain</h3>
